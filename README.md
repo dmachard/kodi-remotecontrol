@@ -1,6 +1,24 @@
 # Python client for Kodi Server
 
-This is a Python remote control for Kodi Server throught the REST API.
+![](https://github.com/dmachard/kodi_remotecontrol/workflows/Publish%20to%20PyPI/badge.svg)
+
+| | |
+| ------------- | ------------- |
+| Author |  Denis Machard <d.machard@gmail.com> |
+| License |  MIT | 
+| PyPI |  https://pypi.org/project/kodi-remotecontrol/ |
+| | |
+
+This is a Python remote control for Kodi Server through the REST API 
+with the minimal but sufficient basic controls.
+
+## Table of contents
+* [Installation](#installation)
+* [Authentication](#authentication)
+* [UI navigation](#ui-navigation)
+* [Player interaction](#player-interaction)
+* [Subtitle selection](#subtitle-selection)
+* [Audio track selection](#audio-track-selection)
 
 ## Installation
 
@@ -24,7 +42,7 @@ from kodi_remotecontrol import Navigation
 
 nav = Navigation(session=session)
 
-nav.press_up()
+nav.press_enter()
 ```
 
 | Buttons  |  Description |
@@ -65,7 +83,21 @@ from kodi_remotecontrol import Subtitle
 sub = Subtitle(session=session)
 
 sub.on()
-sub.select_next()
+
+print(sub.select_next())
+{
+  'id': 1,
+  'jsonrpc': '2.0',
+  'result':
+        { 
+            'currentsubtitle':
+                {
+                    'index': 1,
+                    'language': 'fre',
+                    'name': 'French
+                }
+        }
+}
 ```
 
 | Buttons  |  Description |
@@ -82,7 +114,23 @@ from kodi_remotecontrol import Audio
 
 aud = Audio(session=session)
 
-aud.select_next()
+print(aud.select_next())
+{ 
+  'id': 1,
+  'jsonrpc': '2.0',
+  'result':
+        {
+            'currentaudiostream': 
+                {
+                    'bitrate': 640000,
+                    'channels': 6,
+                    'codec': 'ac3',
+                    'index': 0,
+                    'language': 'fre',
+                    'name': 'AC3 5.1(side)'
+                }
+        }
+}
 ```
 
 | Buttons  |  Description |

@@ -7,7 +7,7 @@ class Audio:
     def select_next(self):
         """select next audio track"""
         self.sess.post(method="Player.SetAudioStream",
-                       params={"playerid": 1, "subtitle": "next" })
+                       params={"playerid": 1, "stream": "next" })
                        
         return self.sess.post(method="Player.GetProperties",
                               params={"playerid": 1, 
@@ -16,7 +16,7 @@ class Audio:
     def select_previous(self):
         """select previous audio track"""
         self.sess.post(method="Player.SetAudioStream",
-                       params={"playerid": 1, "subtitle": "previous" })
+                       params={"playerid": 1, "stream": "previous" })
         
         return self.sess.post(method="Player.GetProperties",
                               params={"playerid": 1, 

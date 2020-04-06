@@ -6,9 +6,8 @@ ip_kodi = "10.0.0.200"
 # Authenticator
 sess = Authenticator(api_host=ip_kodi)
 
+# Basic audio controls
 audio = Audio(session=sess)
-print(audio.select_next())
-# {'id': 1, 'jsonrpc': '2.0', 'result': 'OK'}
 
-# audio.select_next()
-# audio.select_previous()
+# Select next audio track
+audio.select_next()

@@ -25,9 +25,9 @@ class Subtitle:
     def press_on(self):
         """play the current subtitle"""
         return self.sess.post(method="Player.SetSubtitle",
-                              params={"playerid": 1, subtitle: "on"})
+                              params={"playerid": 1, "subtitle": "on"})
         
     def press_off(self):
         """stop to play subtitle"""
         return self.sess.post(method="Player.SetSubtitle",
-                              params={"playerid": 1, subtitle: "off"})
+                              params={"playerid": 1, "subtitle": "off"})
