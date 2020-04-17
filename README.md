@@ -1,6 +1,8 @@
 # Python client for Kodi Server
 
 ![](https://github.com/dmachard/kodi_remotecontrol/workflows/Publish%20to%20PyPI/badge.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/dnsdist-console)
 
 | | |
 | ------------- | ------------- |
@@ -9,12 +11,12 @@
 | PyPI |  https://pypi.org/project/kodi-remotecontrol/ |
 | | |
 
-This is a Python remote control for Kodi Server through the REST API 
+This is a Python remote control for Kodi Server through the **JSON-RPC HTTP API** or the **Event Server**
 with the minimal but sufficient basic controls.
 
 ## Table of contents
 * [Installation](#installation)
-* [Authentication](#authentication)
+* [Remote control](#remotre-control)
 * [UI navigation](#ui-navigation)
 * [Player interaction](#player-interaction)
 * [Subtitle selection](#subtitle-selection)
@@ -26,22 +28,43 @@ with the minimal but sufficient basic controls.
 pip install kodi_remotecontrol
 ```
 
-## Authentication
+## Remote control
+
+### HTTP client
+
+As prerequisite since the kodi interface, go to *System/Settings/Network/Services* and activate *Allow control of Kodi via HTTP*.
 
 ```python
-from kodi_remotecontrol import Authenticator
+from kodi_remotecontrol import HttpClient
 
-kodi_ip = "10.0.0.240"
-session = Authenticator(api_host=kodi_ip)
+# prepare remote control
+kodi_ip = "10.0.0.200"
+api_rc = HttpClient(api_host=kodi_ip)
 ```
- 
+
+### Event client
+
+As prerequisite since the kodi interface, go to 'System/Settings/Network/Services' and activate *Allow programs on other systems to control Kodi*.
+
+```python
+from kodi_remotecontrol import EventClient
+
+# prepare remote control
+kodi_ip = "10.0.0.200"
+api_rc = EventClient(api_host=kodi_ip)
+```
+
 ## UI navigation
 
 ```python
 from kodi_remotecontrol import Navigation
 
-nav = Navigation(session=session)
+# prepare remote control
+kodi_ip = "10.0.0.200"
+api_rc = EventClient(api_host=kodi_ip)
 
+# ui navigation
+nav = Navigation(api_rc=api_rc)
 nav.press_enter()
 ```
 
@@ -60,8 +83,12 @@ nav.press_enter()
 ```python
 from kodi_remotecontrol import Player
 
-nav = Player(session=session)
+# prepare remote control
+kodi_ip = "10.0.0.200"
+api_rc = EventClient(api_host=kodi_ip)
 
+# player interaction
+nav = Player(api_rc=api_rc)
 nav.press_play()
 ```
 
@@ -80,60 +107,34 @@ nav.press_play()
 ```python
 from kodi_remotecontrol import Subtitle
 
-sub = Subtitle(session=session)
+# prepare remote control
+kodi_ip = "10.0.0.200"
+api_rc = EventClient(api_host=kodi_ip)
 
-sub.on()
-
-print(sub.select_next())
-{
-  'id': 1,
-  'jsonrpc': '2.0',
-  'result':
-        { 
-            'currentsubtitle':
-                {
-                    'index': 1,
-                    'language': 'fre',
-                    'name': 'French
-                }
-        }
-}
+# subtitle selection
+sub = Subtitle(api_rc=api_rc)
+sub.press_show()
 ```
 
 | Buttons  |  Description |
 |----------|--------------|
-| press_on() | ON button |
-| press_on() | OFF button |
+| press_show() | SHOW button |
 | select_next() | NEXT button |
-| select_previous() | PREVIOUS button |
 
 ## Audio track selection
 
 ```python
 from kodi_remotecontrol import Audio
 
-aud = Audio(session=session)
+# prepare remote control
+kodi_ip = "10.0.0.200"
+api_rc = EventClient(api_host=kodi_ip)
 
-print(aud.select_next())
-{ 
-  'id': 1,
-  'jsonrpc': '2.0',
-  'result':
-        {
-            'currentaudiostream': 
-                {
-                    'bitrate': 640000,
-                    'channels': 6,
-                    'codec': 'ac3',
-                    'index': 0,
-                    'language': 'fre',
-                    'name': 'AC3 5.1(side)'
-                }
-        }
-}
+# audio track selection
+aud = Audio(api_rc=api_rc)
+aud.select_next()
 ```
 
 | Buttons  |  Description |
 |----------|--------------|
 | select_next() | NEXT button |
-| select_previous() | PREVIOUS button |

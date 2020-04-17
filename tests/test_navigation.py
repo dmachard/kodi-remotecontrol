@@ -1,13 +1,11 @@
-from kodi_remotecontrol import Authenticator, Navigation
+from kodi_remotecontrol import HttpClient, Navigation
 
-# ip remote server
-ip_kodi = "10.0.0.200"
-
-# Authenticator
-sess = Authenticator(api_host=ip_kodi)
+# prepare remote control
+kodi_ip = "10.0.0.200"
+api_rc = HttpClient(api_host=kodi_ip)
 
 # Basic UI controls
-nav = Navigation(session=sess)
+nav = Navigation(api_rc=api_rc)
 
 # Press on enter button
 nav.press_enter()

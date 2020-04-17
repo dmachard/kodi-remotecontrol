@@ -1,13 +1,11 @@
-from kodi_remotecontrol import Authenticator, Subtitle
+from kodi_remotecontrol import HttpClient, Subtitle
 
-# ip remote server
-ip_kodi = "10.0.0.200"
-
-# Authenticator
-sess = Authenticator(api_host=ip_kodi)
+# prepare remote control
+kodi_ip = "10.0.0.200"
+api_rc = HttpClient(api_host=kodi_ip)
 
 # Basic subtitle controls
-sub = Subtitle(session=sess)
+sub = Subtitle(api_rc=api_rc)
 
 # Display subtitle
 sub.press_on()

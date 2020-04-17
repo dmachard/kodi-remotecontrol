@@ -1,13 +1,11 @@
-from kodi_remotecontrol import Authenticator, Audio
+from kodi_remotecontrol import HttpClient, Audio
 
-# ip remote server
-ip_kodi = "10.0.0.200"
-
-# Authenticator
-sess = Authenticator(api_host=ip_kodi)
+# prepare remote control
+kodi_ip = "10.0.0.200"
+api_rc = HttpClient(api_host=kodi_ip)
 
 # Basic audio controls
-audio = Audio(session=sess)
+audio = Audio(api_rc=api_rc)
 
 # Select next audio track
 audio.select_next()

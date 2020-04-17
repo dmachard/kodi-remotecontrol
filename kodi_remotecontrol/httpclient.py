@@ -2,7 +2,7 @@
 import requests
 import json
 
-class Authenticator:
+class HttpClient:
     def __init__(self, api_host,
                        api_port=8080, 
                        api_username="",
