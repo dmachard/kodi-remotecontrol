@@ -10,30 +10,14 @@ ACTION_EXECBUILTIN = b"\1"
 class EventClient:
     def __init__(self, api_host,
                        api_port=9777):
-        """authenticator class"""
+        """event client class"""
         self.api_host = api_host
         self.api_port = api_port
 
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
     def get_header(self, psize, ptype):
-        """
-        /*     -----------------------------                                    */
-        /*     | -H1 Signature ("XBMC")    | - 4  x CHAR                4B      */
-        /*     | -H2 Version (eg. 2.0)     | - 2  x UNSIGNED CHAR       2B      */
-        /*     | -H3 PacketType            | - 1  x UNSIGNED SHORT      2B      */
-        /*     | -H4 Sequence number       | - 1  x UNSIGNED LONG       4B      */
-        /*     | -H5 No. of packets in msg | - 1  x UNSIGNED LONG       4B      */
-        /*     | -H6 Payload size          | - 1  x UNSIGNED SHORT      2B      */
-        /*     | -H7 Client's unique token | - 1  x UNSIGNED LONG       4B      */
-        /*     | -H8 Reserved              | - 10 x UNSIGNED CHAR      10B      */
-        /*     |---------------------------|                                    */
-        /*     | -P1 payload               | -                                  */
-        /*     -----------------------------                                    */
-
-        uint16 = !H
-        uiint32 = !I
-        """
+        """return udp header packet"""
         sig = b'XBMC'
         ver = b'\2\0'
         reserved = b"\0" * 10
@@ -51,7 +35,7 @@ class EventClient:
                                  *reserved)
 
     def send_packet(self, pkt):  
-        """connect to event servers"""
+        """connect to event servers and send packet"""
         addr = (self.api_host, self.api_port)
         self.sock.sendto(pkt, addr)
 

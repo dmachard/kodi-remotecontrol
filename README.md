@@ -1,4 +1,4 @@
-# Python client for Kodi Server
+# Python client for Kodi Server API
 
 ![](https://github.com/dmachard/kodi_remotecontrol/workflows/Publish%20to%20PyPI/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -11,8 +11,8 @@
 | PyPI |  https://pypi.org/project/kodi-remotecontrol/ |
 | | |
 
-This is a Python remote control for Kodi Server through the **JSON-RPC HTTP API** or the **Event Server**
-with the minimal but sufficient basic controls.
+This is a Python remote control for Kodi Server through the **JSON-RPC HTTP** or the **Event Server** API
+with minimal but sufficient basic controls.
 
 ## Table of contents
 * [Installation](#installation)
@@ -32,7 +32,7 @@ pip install kodi_remotecontrol
 
 ### HTTP client
 
-As prerequisite since the kodi interface, go to *System/Settings/Network/Services* and activate *Allow control of Kodi via HTTP*.
+As prerequisite, go to *System/Settings/Network/Services* and activate *Allow control of Kodi via HTTP*.
 
 ```python
 from kodi_remotecontrol import HttpClient
@@ -44,7 +44,7 @@ api_rc = HttpClient(api_host=kodi_ip)
 
 ### Event client
 
-As prerequisite since the kodi interface, go to 'System/Settings/Network/Services' and activate *Allow programs on other systems to control Kodi*.
+As prerequisite, go to 'System/Settings/Network/Services' and activate *Allow programs on other systems to control Kodi*.
 
 ```python
 from kodi_remotecontrol import EventClient

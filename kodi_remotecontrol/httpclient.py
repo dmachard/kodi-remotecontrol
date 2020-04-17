@@ -7,7 +7,7 @@ class HttpClient:
                        api_port=8080, 
                        api_username="",
                        api_password="",):
-        """authenticator class"""
+        """http client class"""
         self.api_host = api_host
         self.api_port = api_port
         self.api_username = api_username
@@ -16,7 +16,7 @@ class HttpClient:
         self.api_url = "http://%s:%s/jsonrpc" % (api_host, api_port)
     
     def post(self, method, params={}):
-        """post request"""
+        """post request to the server"""
         payload = { "method": method, 
                     "id": 1, "jsonrpc": "2.0",
                     "params": params}
