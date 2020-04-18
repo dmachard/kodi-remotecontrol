@@ -19,6 +19,7 @@ This remote control acts as a websocket proxy of the **Event Server** API for mo
 * [Installation](#installation)
 * [Start remote control](#start-remote-control)
 * [Available buttons](#available-buttons)
+* [Websocket client](#websocket-client)
 
 ## Installation
 
@@ -91,3 +92,49 @@ send the following **JSON** commands to the address `ws://<remotecontrol_ip>:808
 | Commands  |  Description |
 |----------|--------------|
 | {'button': 'press_language'} | Toggle language |
+
+## Websocket client
+
+### Basic demo
+
+```html
+<html>
+  <head>
+      <title>RemoteControl demo</title>
+      <style type="text/css">
+          .buttons {
+              font-size: 1em;
+              display: flex;
+              justify-content: center;
+          }
+          .button {
+              padding: 2rem;
+              border: medium solid;
+              min-height: 1em;
+              min-width: 1em;
+              cursor: pointer;
+              user-select: none;
+          }
+      </style>
+  </head>
+  <body>
+    <div class="buttons">
+      <div class="play button">Play</div>
+      <div class="pause button">Pause</div>
+    </div>
+    <script>
+      var websocket = new WebSocket("ws://localhost:8081/");
+
+      var play = document.querySelector('.play')
+      var pause = document.querySelector('.pause')
+
+      play.onclick = function (event) {
+        websocket.send(JSON.stringify({button: 'press_play'}));
+      }
+      pause.onclick = function (event) {
+        websocket.send(JSON.stringify({button: 'press_pause'}));
+      }
+    </script>
+  </body>
+</html>
+````
