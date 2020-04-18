@@ -53,7 +53,7 @@ optional arguments:
 ## Available buttons
 
 To interact with the remote control, you need to use a websocket client and 
-send the following **JSON** command to the address `ws://<remotectronol_ip>:8081`.
+send the following **JSON** commands to the address `ws://<remotecontrol_ip>:8081`.
 
 ### UI Navigation
 

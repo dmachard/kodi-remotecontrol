@@ -15,6 +15,7 @@ parser.add_argument("--desthost", type=str, default="127.0.0.1", help="destinati
 parser.add_argument("--bindport", type=int, default=8081, help="bind on port default=8081")
 parser.add_argument("--bindhost", type=str, default="0.0.0.0", help="bind on host default=0.0.0.0")
 
+# parse provided arguments and logging
 args = parser.parse_args()
 logging.debug( args )
 
@@ -25,6 +26,7 @@ async def handle_message(websocket, path):
     global eventapi
     try:
         async for message in websocket:
+            # decode message, json expected
             data = json.loads(message)
 
             if "button" not in data:
@@ -79,6 +81,7 @@ async def ping_eventserver():
     """send ping to kodi on eventserver api"""
     global eventapi
     while True:
+        # send a ping to the eventserver every 50 seconds
         eventapi.send_ping()
         logging.debug('ping to eventserver')
         await asyncio.sleep(50)
@@ -94,16 +97,22 @@ def start_remotecontrol():
 
     # prepare the event client with destination ip/port provided
     eventapi = eventclient.EventClient(api_host=args.desthost, 
-                                    api_port=args.destport)
+                                       api_port=args.destport)
 
-    loop = asyncio.get_event_loop()
+    # prepare the websocket server
     start_server = websockets.serve(handle_message, args.bindhost, args.bindport)
 
-    loop.run_until_complete(start_server)
-    loop.create_task(wakeup_loop())
-    loop.create_task(ping_eventserver())
+    # get the main event loop
+    eventloop = asyncio.get_event_loop()
+    # run server
+    eventloop.run_until_complete(start_server)
+    # hack to support KeyboardInterrupt
+    eventloop.create_task(wakeup_loop())
+    # schedule the execution of the ping request
+    eventloop.create_task(ping_eventserver())
 
+    # run event loop
     try:
-        loop.run_forever()
+        eventloop.run_forever()
     except KeyboardInterrupt:
         pass
