@@ -58,40 +58,40 @@ send the following **JSON** commands to the address `ws://<remotecontrol_ip>:808
 
 ### UI Navigation
 
-| Commands |  Description |
-|----------|--------------|
-| {'button': 'press_up'} | press on up button |
-| {'button': 'press_down'} | press on down button |
-| {'button': 'press_left'} | press on left button |
-| {'button': 'press_right'} | press on right button |
-| {'button': 'press_back'} | press on back button |
-| {'button': 'press_enter'} | press on enter button |
-| {'button': 'press_ctxmenu'} | display contextual menu |
-| {'button': 'press_playlist'} | display playlist |
-| {'button': 'press_logoff'} | press on logoff button |
+```json
+{"button": "press_up"} // press on up button
+{"button": "press_down"} // press on down button
+{"button": "press_left"} // press on left button
+{"button": "press_right"} // press on right button
+{"button": "press_back"} // press on back button
+{"button": "press_enter"} // press on enter button
+{"button": "press_ctxmenu"} // display contextual menu
+{"button": "press_playlist"} // display playlist
+{"button": "press_logoff"} // press on logoff button
+```
 
 ### Player interaction
 
-| Commands  |  Description |
-|----------|--------------|
-| {'button': 'press_play'} | press on play button |
-| {'button': 'press_stop'} | press on stop button |
-| {'button': 'press_pause'} | press on pause button |
-| {'button': 'press_previous'}| press on previous button |
-| {'button': 'press_next'} | press on next button |
-| {'button': 'press_osd'} | display OSD |
+```json
+{"button": "press_play"} // press on play button
+{"button": "press_stop"} // press on stop button
+{"button": "press_pause"} // press on pause button
+{"button": "press_previous"} // press on previous button
+{"button": "press_next"} // press on next button
+{"button": "press_osd"} // display OSD
+```
 
 ### Subtitle selection
 
-| Commands  |  Description |
-|----------|--------------|
-| {'button': 'press_subtitle'} | Toggle subtitle |
+```json
+{"button": "press_subtitle"} // toggle subtitle
+```
 
 ### Audio track selection
 
-| Commands  |  Description |
-|----------|--------------|
-| {'button': 'press_language'} | Toggle language |
+```json
+{"button": "press_language"} // toggle language
+```
 
 ## Websocket client
 
