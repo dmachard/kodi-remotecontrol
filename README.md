@@ -17,8 +17,8 @@ This remote control acts as a websocket proxy of the **Event Server** API for mo
 
 ## Table of contents
 * [Installation](#installation)
-* [Starty remote control](#start-remote-control)
-* [Buttons](#buttons)
+* [Start remote control](#start-remote-control)
+* [Available buttons](#available-buttons)
 
 ## Installation
 
@@ -28,15 +28,14 @@ pip install kodi_remotecontrol
 
 ## Start remote control
 
-As prerequisite, go to `System/Settings/Network/Services` and activate *Allow programs on other systems to control Kodi*.
-
+As prerequisite, go to `System/Settings/Network/Services` and activate `Allow programs on other systems to control Kodi`.
 After that, you can start the remote control and provides the address of your kodi server.
 
 ```
 kodi_remotecontrol --desthost=10.0.0.200
 ```
 
-Available options:
+Other available options:
 
 ```
 kodi_remotecontrol --help
@@ -51,10 +50,10 @@ optional arguments:
   --bindhost BINDHOST  bind on host default=0.0.0.0
 ```
 
-## Buttons
+## Available buttons
 
-The following commands are available from the remote control and must be sent 
-from a websocket client with JSON format.
+To interact with the remote control, you need to use a websocket client and 
+send the following **JSON** command to the address `ws://<remotectronol_ip>:8081`.
 
 ### UI Navigation
 
