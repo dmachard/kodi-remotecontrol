@@ -23,6 +23,11 @@ class EventClient:
 
         self.send_helo()
 
+    def refresh_connection(self):
+        """refresh token"""
+        self.api_token = int(time.time())
+        self.send_helo()
+
     def get_header(self, psize, ptype):
         """return udp header packet"""
         sig = b'XBMC'

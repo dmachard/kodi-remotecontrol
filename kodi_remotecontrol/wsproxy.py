@@ -7,7 +7,7 @@ import logging
 
 from kodi_remotecontrol import eventclient
 
-logging.basicConfig(format='%(asctime)s %(message)s', level=logging.INFO)
+logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG)
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--destport", type=int, default=9777, help="destination kodi port default=9777")
@@ -61,10 +61,13 @@ async def handle_message(websocket, path):
                 eventapi.send_action(msg="Action(Select)")
             elif data["button"] == "press_back":
                 eventapi.send_action(msg="Action(Back)")
-            elif data["button"] == "press_logoff":
-                eventapi.send_action(msg="System.LogOff")
             elif data["button"] == "press_ctxmenu":
                 eventapi.send_action(msg="Action(ContextMenu)")
+            # system
+            elif data["button"] == "press_reset":
+                eventapi.refresh_connection()
+            elif data["button"] == "press_logoff":
+                eventapi.send_action(msg="System.LogOff")
             # subtitle
             elif data["button"] == "press_subtitle":
                 eventapi.send_action(msg="Action(NextSubtitle)")
