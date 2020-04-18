@@ -13,11 +13,11 @@ setuptools.setup(
     version=__version__,
     author="Denis MACHARD",
     author_email="d.machard@gmail.com",
-    description="Python client for Kodi server",
+    description="Python remote control for Kodi server",
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
     url="https://github.com/dmachard/kodi_remotecontrol",
-    packages=['kodi_remotecontrol', 'tests'],
+    packages=['kodi_remotecontrol'],
     include_package_data=True,
     platforms='any',
     keywords=KEYWORDS,
@@ -27,7 +27,8 @@ setuptools.setup(
         "Operating System :: OS Independent",
         "Topic :: Software Development :: Libraries",
     ],
+    entry_points={'console_scripts': ['kodi_remotecontrol = kodi_remotecontrol.wsproxy:start_remotecontrol']},
     install_requires=[
-        "requests"
+        "websockets"
     ]
 )

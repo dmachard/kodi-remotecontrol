@@ -11,16 +11,13 @@
 | PyPI |  https://pypi.org/project/kodi-remotecontrol/ |
 | | |
 
-This is a Python remote control for Kodi Server through the **JSON-RPC HTTP** or the **Event Server** API
-with minimal but sufficient basic controls.
+This is a Python remote control for Kodi with minimal but sufficient basic controls.
+This remote control acts as a websocket proxy of the **Event Server** API for more reactivity.
 
 ## Table of contents
 * [Installation](#installation)
-* [Remote control](#remotre-control)
-* [UI navigation](#ui-navigation)
-* [Player interaction](#player-interaction)
-* [Subtitle selection](#subtitle-selection)
-* [Audio track selection](#audio-track-selection)
+* [Remote control](#remote-control)
+* [Buttons](#buttons)
 
 ## Installation
 
@@ -30,111 +27,66 @@ pip install kodi_remotecontrol
 
 ## Remote control
 
-### HTTP client
-
-As prerequisite, go to *System/Settings/Network/Services* and activate *Allow control of Kodi via HTTP*.
-
-```python
-from kodi_remotecontrol import HttpClient
-
-# prepare remote control
-kodi_ip = "10.0.0.200"
-api_rc = HttpClient(api_host=kodi_ip)
-```
-
-### Event client
-
 As prerequisite, go to 'System/Settings/Network/Services' and activate *Allow programs on other systems to control Kodi*.
+After that, you can start the remote control and provides the address of your kodi server.
 
-```python
-from kodi_remotecontrol import EventClient
-
-# prepare remote control
-kodi_ip = "10.0.0.200"
-api_rc = EventClient(api_host=kodi_ip)
+```
+kodi_remotecontrol --desthost=10.0.0.200
 ```
 
-## UI navigation
+All options available:
 
-```python
-from kodi_remotecontrol import Navigation
+```
+kodi_remotecontrol --help
+usage: kodi_remotecontrol [-h] [--destport DESTPORT] [--desthost DESTHOST]
+                        [--bindport BINDPORT] [--bindhost BINDHOST]
 
-# prepare remote control
-kodi_ip = "10.0.0.200"
-api_rc = EventClient(api_host=kodi_ip)
-
-# ui navigation
-nav = Navigation(api_rc=api_rc)
-nav.press_enter()
+optional arguments:
+  -h, --help           show this help message and exit
+  --destport DESTPORT  destination kodi port default=9777
+  --desthost DESTHOST  destination kodi host default=127.0.0.1
+  --bindport BINDPORT  bind on port default=8081
+  --bindhost BINDHOST  bind on host default=0.0.0.0
 ```
 
-| Buttons  |  Description |
+## Buttons
+
+The following commands are available from the remote control and must be sent 
+from a websocket client with JSON format.
+
+### UI Navigation
+
+| Commands |  Description |
 |----------|--------------|
-| press_up() | UP button |
-| press_down() | DOWN button |
-| press_left() | LEFT button |
-| press_right() | RIGHT button |
-| press_back() | BACK button |
-| press_enter() | ENTER button |
-| press_contextmenu() | CONTEXT MENU button |
+| {'button': 'press_up'} | press on up button |
+| {'button': 'press_down'} | press on down button |
+| {'button': 'press_left'} | press on left button |
+| {'button': 'press_right'} | press on right button |
+| {'button': 'press_back'} | press on back button |
+| {'button': 'press_enter'} | press on enter button |
+| {'button': 'press_ctxmenu'} | display contextual menu |
+| {'button': 'press_playlist'} | display playlist |
+| {'button': 'press_logoff'} | press on logoff button |
 
-## Player interaction
+### Player interaction
 
-```python
-from kodi_remotecontrol import Player
-
-# prepare remote control
-kodi_ip = "10.0.0.200"
-api_rc = EventClient(api_host=kodi_ip)
-
-# player interaction
-nav = Player(api_rc=api_rc)
-nav.press_play()
-```
-
-| Buttons  |  Description |
+| Commands  |  Description |
 |----------|--------------|
-| press_play() | PLAY button |
-| press_stop() | STOP button |
-| press_pause() | PAUSE button |
-| press_shuffle() | SHUFFLE button |
-| press_previous() | PREVIOUS button |
-| press_next() | NEXT button |
-| press_info() | INFO button |
+| {'button': 'press_play'} | press on play button |
+| {'button': 'press_stop'} | press on stop button |
+| {'button': 'press_pause'} | press on pause button |
+| {'button': 'press_previous'}| press on previous button |
+| {'button': 'press_next'} | press on next button |
+| {'button': 'press_osd'} | display OSD |
 
-## Subtitle selection
+### Subtitle selection
 
-```python
-from kodi_remotecontrol import Subtitle
-
-# prepare remote control
-kodi_ip = "10.0.0.200"
-api_rc = EventClient(api_host=kodi_ip)
-
-# subtitle selection
-sub = Subtitle(api_rc=api_rc)
-sub.press_show()
-```
-
-| Buttons  |  Description |
+| Commands  |  Description |
 |----------|--------------|
-| press_show() | SHOW button |
-| select_next() | NEXT button |
+| {'button': 'press_subtitle'} | Toggle subtitle |
 
-## Audio track selection
+### Audio track selection
 
-```python
-from kodi_remotecontrol import Audio
-
-# prepare remote control
-kodi_ip = "10.0.0.200"
-api_rc = EventClient(api_host=kodi_ip)
-
-# audio track selection
-aud = Audio(api_rc=api_rc)
-aud.select_next()
-```
-
-| Buttons  |  Description |
+| Commands  |  Description |
 |----------|--------------|
-| select_next() | NEXT button |
+| {'button': 'press_language'} | Toggle language |
