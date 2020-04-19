@@ -20,6 +20,7 @@ This remote control acts as a websocket proxy of the **Event Server** API for mo
 * [Start remote control](#start-remote-control)
 * [Available buttons](#available-buttons)
 * [Websocket client](#websocket-client)
+* [Systemd service](#systemd-service)
 
 ## Installation
 
@@ -138,3 +139,31 @@ send the following **JSON** commands to the address `ws://<remotecontrol_ip>:808
   </body>
 </html>
 ````
+
+## Systemd service
+
+Example of system service file for Centos7
+
+```bash
+vim /etc/systemd/system/kodi_remotecontrol.service
+
+[Unit]
+Description=Kodi remote control Service
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/kodi_remotecontrol --desthost=10.0.0.200
+Restart=on-abort
+Type=simple
+User=root
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```bash
+systemctl daemon-reload
+systemctl start kodi_remotecontrol
+systemctl status kodi_remotecontrol
+systemctl enable kodi_remotecontrol
+```
