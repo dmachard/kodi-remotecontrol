@@ -10,8 +10,8 @@ from kodi_remotecontrol import eventclient
 logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG)
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--destport", type=int, default=9777, help="destination kodi port default=9777")
-parser.add_argument("--desthost", type=str, default="127.0.0.1", help="destination kodi host default=127.0.0.1"), 
+parser.add_argument("--destport", type=int, default=9777, help="destination backend udp port default=9777")
+parser.add_argument("--desthost", type=str, default="127.0.0.1", help="destination backend host address default=127.0.0.1"), 
 parser.add_argument("--bindport", type=int, default=8081, help="bind on port default=8081")
 parser.add_argument("--bindhost", type=str, default="0.0.0.0", help="bind on host default=0.0.0.0")
 
