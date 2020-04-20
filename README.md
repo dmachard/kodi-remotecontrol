@@ -13,7 +13,7 @@
 
 This is a Python remote control for Kodi with minimal but sufficient basic controls.
 
-This remote control acts as a websocket proxy of the **Event Server** API for more reactivity.
+This remote control acts as a websocket Gateway of the UDP **Event Server** API for more reactivity.
 
 ## Table of contents
 * [Installation](#installation)
@@ -30,7 +30,10 @@ pip install kodi_remotecontrol
 
 ## Start remote control
 
-As prerequisite, go to `System/Settings/Network/Services` and activate `Allow programs on other systems to control Kodi`.
+As prerequisite, go to `System/Settings/Network/Services` and activate the two following options
+ - `Allow programs on other systems to control Kodi`
+ - `Allow control of Kodi via HTTP`
+ 
 After that, you can start the remote control and provides the address of your kodi server.
 
 ```

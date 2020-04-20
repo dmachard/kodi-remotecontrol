@@ -98,9 +98,11 @@ def start_remotecontrol():
     """start remote control"""
     global eventapi
 
+    logging.info("Start websocket gateway...")
+
     # prepare the event client with destination ip/port provided
     eventapi = eventclient.EventClient(api_host=args.desthost, 
-                                       api_port=args.destport)
+                                       api_udp_port=args.destport)
 
     # prepare the websocket server
     start_server = websockets.serve(handle_message, args.bindhost, args.bindport)
