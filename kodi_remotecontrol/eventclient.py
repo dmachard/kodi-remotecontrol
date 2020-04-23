@@ -59,12 +59,6 @@ class EventClient:
             logging.debug("Backend is ready")
             self.send_helo()
 
-    def refresh_connection(self):
-        """refresh token"""
-        logging.debug("Refresh udp connection")
-        self.api_token = int(time.time())
-        self.send_helo()
-
     def get_header(self, psize, ptype):
         """return udp header packet"""
         sig = b'XBMC'
@@ -133,3 +127,77 @@ class EventClient:
         self.send_packet(pkt=pkt)
 
         return None
+
+    def press_reset(self):
+        """refresh token"""
+        logging.debug("Refresh udp connection")
+        self.api_token = int(time.time())
+        self.send_helo()
+
+    def press_play(self):
+        """press play button"""
+        self.send_action(msg="Action(Play)")
+
+    def press_pause(self):
+        """press pause button"""
+        self.send_action(msg="Action(Pause)") 
+
+    def press_stop(self):
+        """press stop button"""
+        self.send_action(msg="Action(Stop)") 
+
+    def press_osd(self):
+        """press osd button"""
+        self.send_action(msg="Action(OSD)") 
+
+    def press_playlist(self):
+        """press playlist button"""
+        self.send_action(msg="Action(Playlist)")
+
+    def press_next(self):
+        """press next button"""
+        self.send_action(msg="Action(SkipNext)") 
+
+    def press_previous(self):
+        """press previous button"""
+        self.send_action(msg="Action(SkipPrevious)") 
+
+    def press_left(self):
+        """press left button"""
+        self.send_action(msg="Action(Left)") 
+
+    def press_right(self):
+        """press right button"""
+        self.send_action(msg="Action(Right)") 
+
+    def press_up(self):
+        """press up button"""
+        self.send_action(msg="Action(Up)")  
+
+    def press_down(self):
+        """press down button"""
+        self.send_action(msg="Action(Down)")  
+
+    def press_enter(self):
+        """press enter button"""
+        self.send_action(msg="Action(Select)")  
+
+    def press_back(self):
+        """press back button"""
+        self.send_action(msg="Action(Back)")  
+
+    def press_ctxmenu(self):
+        """press contextual menu button"""
+        self.send_action(msg="Action(ContextMenu)")  
+
+    def press_logoff(self):
+        """press logoff button"""
+        self.send_action(msg="System.LogOff")  
+
+    def press_subtitle(self):
+        """press subtitle button"""
+        self.send_action(msg="Action(NextSubtitle)")  
+
+    def press_language(self):
+        """press language button"""
+        self.send_action(msg="Action(AudioNextLanguage)")  

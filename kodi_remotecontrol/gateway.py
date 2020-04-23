@@ -31,52 +31,13 @@ async def handle_message(websocket, path):
 
             if "button" not in data:
                 raise Exception("bad received message, button is missing")
-            logging.debug("button pressed: %s" % data["button"])
+            logging.debug("trying to press on button: %s" % data["button"])
 
-            # player
-            if data["button"] == "press_play":
-                eventapi.send_action(msg="Action(Play)")
-            elif data["button"] == "press_pause":
-                eventapi.send_action(msg="Action(Pause)")
-            elif data["button"] == "press_stop":
-                eventapi.send_action(msg="Action(Stop)")
-            elif data["button"] == "press_osd":
-                eventapi.send_action(msg="Action(OSD)")
-            elif data["button"] == "press_playlist":
-                eventapi.send_action(msg="Action(Playlist)")
-            elif data["button"] == "press_next":
-                eventapi.send_action(msg="Action(SkipNext)")
-            elif data["button"] == "press_previous":
-                eventapi.send_action(msg="Action(SkipPrevious)")
-            # navigation
-            elif data["button"] == "press_left":
-                eventapi.send_action(msg="Action(Left)")
-            elif data["button"] == "press_right":
-                eventapi.send_action(msg="Action(Right)")
-            elif data["button"] == "press_up":
-                eventapi.send_action(msg="Action(Up)")
-            elif data["button"] == "press_down":
-                eventapi.send_action(msg="Action(Down)")
-            elif data["button"] == "press_enter":
-                eventapi.send_action(msg="Action(Select)")
-            elif data["button"] == "press_back":
-                eventapi.send_action(msg="Action(Back)")
-            elif data["button"] == "press_ctxmenu":
-                eventapi.send_action(msg="Action(ContextMenu)")
-            # system
-            elif data["button"] == "press_reset":
-                eventapi.refresh_connection()
-            elif data["button"] == "press_logoff":
-                eventapi.send_action(msg="System.LogOff")
-            # subtitle
-            elif data["button"] == "press_subtitle":
-                eventapi.send_action(msg="Action(NextSubtitle)")
-            # language
-            elif data["button"] == "press_language":
-                eventapi.send_action(msg="Action(AudioNextLanguage)")
-            else:
-                raise Exception("unsupported button: %s" % data["button"])    
-
+            try:
+                press_function = getattr(eventapi, data["button"])
+                press_function()
+            except AttributeError as e:
+                logging.error("unsupported press button %s" % e)
     except Exception as e:
         logging.error("%s" % e)
 

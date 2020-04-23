@@ -1,3 +1,3 @@
-from kodi_remotecontrol import wsproxy
+from kodi_remotecontrol import gateway
 
-wsproxy.start_remotecontrol()
+gateway.start_remotecontrol()
