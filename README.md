@@ -13,7 +13,7 @@
 
 This is a Python remote control for Kodi with minimal but sufficient basic controls.
 
-This remote control acts as a websocket Gateway of the UDP **Event Server** API for more reactivity.
+This remote control acts as a **WebSocket Gateway** of the UDP **Event Server** API for more reactivity.
 A [frontend](vuejs-client/README.md) for this project is also available.
 
 ## Table of contents
