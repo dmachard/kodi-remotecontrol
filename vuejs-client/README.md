@@ -3,7 +3,7 @@
 RemoteControl for Kodi Server. This frontend must be used with
 the [Websocket/UDP gateway](https://github.com/dmachard/kodi_remotecontrol-gateway)
 
-![web interface](https://github.com/dmachard/kodi_remotecontrol-client/blob/master/images/webinterface_v1.png)
+![web interface](/vuejs-client/images/webinterface_v1.png)
 
 ## Installation
 
