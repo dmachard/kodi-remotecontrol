@@ -58,9 +58,7 @@ class EventClient:
                     kodi_ready = True
                 except requests.exceptions.ConnectionError:
                     logging.debug("Failed to ping backend, make sure that Kodi is running. Retrying in 10 sec")
-                    pass
                     time.sleep(10)
-
 
         if timeout_raised:
             raise Exception( "Backend api not ready ?" )
