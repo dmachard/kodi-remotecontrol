@@ -45,12 +45,22 @@ class EventClient:
             else:
                 try:
                     # send ping to kodi jsonrpc api
+                    logging.debug("Pinging backend...")
                     r = requests.post(url=api_url, json=p)
-                    logging.debug("Backend response: %s" % r.json())
+                    
+                    if len(r.content) != 0:
+                        logging.debug("Backend response: %s" % r.json()['result'])
+                    elif r.status_code == 401:
+                        logging.debug("Got an unauthorized response, make sure you don't have a password for the Web Server")
+                    elif r.status_code != 200:
+                        logging.debug("Got code: %i from backend, continuing..." % r.status_code)
+                    
                     kodi_ready = True
                 except requests.exceptions.ConnectionError:
+                    logging.debug("Failed to ping backend, make sure that Kodi is running. Retrying in 10 sec")
                     pass
                     time.sleep(10)
+
 
         if timeout_raised:
             raise Exception( "Backend api not ready ?" )
