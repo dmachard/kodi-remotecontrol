@@ -15,8 +15,9 @@ ACTION_EXECBUILTIN = b"\1"
 class EventClient:
     def __init__(self, api_host,
                        api_udp_port=9777,
-                       api_http_port=8080
-                       ):
+                       api_http_port=8080,
+                       api_http_login=None,
+                       api_http_pwd=None):
         """event client class"""
         self.api_host = api_host
         self.api_udp_port = api_udp_port
@@ -61,10 +62,10 @@ class EventClient:
                     time.sleep(10)
 
         if timeout_raised:
-            raise Exception( "Backend api not ready ?" )
+            raise Exception( "Kodi is not running?" )
 
         if kodi_ready:
-            logging.debug("Backend is ready")
+            logging.debug("Event UDP channel initialization...")
             self.send_helo()
 
     def get_header(self, psize, ptype):

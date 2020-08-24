@@ -11,8 +11,8 @@
 | PyPI |  https://pypi.org/project/kodi-remotecontrol/ |
 | | |
 
-This is a Python remote control for Kodi with minimal but sufficient basic controls. This remote control acts as a **WebSocket Gateway** of the UDP **Event Server** API for more reactivity.
-A [frontend](vuejs-client/README.md) for this project is also available.
+This is a Python remote control for Kodi with minimal but sufficient basic controls.
+This remote control acts as a **WebSocket Gateway** of the UDP **Event Server** API for more reactivity.
 
 ## Table of contents
 * [Installation](#installation)
@@ -98,7 +98,14 @@ send the following **JSON** commands to the address `ws://<remotecontrol_ip>:808
 
 ## Websocket client
 
+### VueJS front end
+
+A [web interface](vuejs-client/README.md) for this project is available.
+
 ### Basic demo
+
+Copy/paste the following html content in a file and open-it in your web browser.
+Configure the websocket address.
 
 ```html
 <html>
