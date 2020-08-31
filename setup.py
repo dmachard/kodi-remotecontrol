@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 import setuptools
-from kodi_remotecontrol import __version__
 
 with open("./kodi_remotecontrol/__init__.py", "r") as fh:
     for line in fh.read().splitlines():
