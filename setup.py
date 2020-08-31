@@ -3,6 +3,11 @@
 import setuptools
 from kodi_remotecontrol import __version__
 
+with open("./kodi_remotecontrol/__init__.py", "r") as fh:
+    for line in fh.read().splitlines():
+        if line.startswith('__version__'):
+            VERSION = line.split('"')[1]
+            
 with open("README.md", "r") as fh:
     LONG_DESCRIPTION = fh.read()
     
@@ -10,7 +15,7 @@ KEYWORDS = ('kodi api remote control')
 
 setuptools.setup(
     name="kodi_remotecontrol",
-    version=__version__,
+    version=VERSION,
     author="Denis MACHARD",
     author_email="d.machard@gmail.com",
     description="Python remote control gateway for Kodi server",
