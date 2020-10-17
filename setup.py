@@ -33,6 +33,7 @@ setuptools.setup(
     ],
     entry_points={'console_scripts': ['kodi_remotecontrol = kodi_remotecontrol.gateway:start_remotecontrol']},
     install_requires=[
-        "websockets"
+        "websockets",
+        "requests"
     ]
 )
