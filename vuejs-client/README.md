@@ -23,6 +23,19 @@ npm run serve
 npm run build
 ```
 
+## Build docker images
+
+```
+docker build . --build-arg VUE_APP_KODI="ws://kodi-rc.home:10000" --file Dockerfile-client -t kodi-remotecontrol-client
+```
+
+## Run docker image
+
+```
+docker run -d -p 8080:8080 --name=kodirc_client kodi-remotecontrol-client --restart=always
+```
+
+
 ## License
 
 This project is available under the MIT license.

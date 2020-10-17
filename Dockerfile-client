@@ -1,0 +1,21 @@
+FROM node:12
+
+LABEL name="Kodi remotecontrol client" \
+      maintainer="d.machard@gmail.com"
+      
+WORKDIR /home/kodi_rc_client
+
+COPY ./vuejs-client/ /home/kodi_rc_client/
+
+ARG VUE_APP_KODI
+ENV VUE_APP_KODI $VUE_APP_KODI
+
+RUN true \
+    && npm install \
+    && npm run build \
+    && npm install -g serve \
+    && true
+
+EXPOSE 8080/tcp
+
+ENTRYPOINT ["serve", "-s", "dist", "-l", "8080"]
