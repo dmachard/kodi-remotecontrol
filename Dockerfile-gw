@@ -1,0 +1,25 @@
+FROM python:3.8-alpine
+
+LABEL name="Kodi remotecontrol gateway" \
+      maintainer="d.machard@gmail.com"
+      
+WORKDIR /home/kodi_remotecontrol
+
+COPY . /home/kodi_remotecontrol/
+
+ENV KODI_HOST="127.0.0.1" \
+    KODI_PORT=9777
+
+RUN true \
+    && adduser -D kodirc \
+    && pip install --no-cache-dir websockets requests\
+    && cd /home/kodi_remotecontrol \
+    && chmod 755 start.sh \
+    && chown -R kodirc:kodirc /home/kodi_remotecontrol \
+    && true
+    
+USER kodirc
+
+EXPOSE 8081/tcp
+
+ENTRYPOINT ["/home/kodi_remotecontrol/start.sh"]

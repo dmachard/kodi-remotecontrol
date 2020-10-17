@@ -1,15 +1,9 @@
 # Python remote control for Kodi
 
 ![](https://github.com/dmachard/kodi_remotecontrol/workflows/Publish%20to%20PyPI/badge.svg)
+![](https://github.com/dmachard/kodi_remotecontrol/workflows/Publish%20to%20DockerHub/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/kodi_remotecontrol)
-
-| | |
-| ------------- | ------------- |
-| Author |  Denis Machard <d.machard@gmail.com> |
-| License |  MIT | 
-| PyPI |  https://pypi.org/project/kodi-remotecontrol/ |
-| | |
 
 This is a Python remote control for Kodi with minimal but sufficient basic controls.
 This remote control acts as a **WebSocket Gateway** of the UDP **Event Server** API for more reactivity.
@@ -19,12 +13,20 @@ This remote control acts as a **WebSocket Gateway** of the UDP **Event Server** 
 * [Start remote control](#start-remote-control)
 * [Available buttons](#available-buttons)
 * [Websocket client](#websocket-client)
-* [Systemd service](#systemd-service)
+* [About](#about)
 
 ## Installation
 
+### PyPI
+
 ```python
 pip install kodi_remotecontrol
+```
+
+### Docker Hub
+
+```bash
+docker pull dmachard/kodi-remotecontrol:latest
 ```
 
 ## Start remote control
@@ -149,30 +151,11 @@ Configure the websocket address.
 </html>
 ````
 
-## Systemd service
+## About
 
-Example of system service file for Centos7
-
-```bash
-vim /etc/systemd/system/kodi_remotecontrol.service
-
-[Unit]
-Description=Kodi remote control Service
-After=network.target
-
-[Service]
-ExecStart=/usr/local/bin/kodi_remotecontrol --desthost=10.0.0.200
-Restart=on-abort
-Type=simple
-User=root
-
-[Install]
-WantedBy=multi-user.target
-```
-
-```bash
-systemctl daemon-reload
-systemctl start kodi_remotecontrol
-systemctl status kodi_remotecontrol
-systemctl enable kodi_remotecontrol
-```
+| | |
+| ------------- | ------------- |
+| Author |  Denis Machard <d.machard@gmail.com> |
+| License |  MIT | 
+| PyPI |  https://pypi.org/project/kodi-remotecontrol/ |
+| | |

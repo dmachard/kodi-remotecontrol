@@ -1,0 +1,25 @@
+name: Publish to DockerHub
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  release:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build the Docker image
+      run: |
+        docker build . --file Dockerfile-gw -t kodi-remotecontrol
+    - name: Tag image
+      run: |
+        VERSION=$(cat ./kodi_remotecontrol/__init__.py | tr '"' $'\n' | sed -n 2p)
+        docker tag kodi-remotecontrol dmachard/kodi-remotecontrol:${VERSION}
+        docker tag kodi-remotecontrol dmachard/kodi-remotecontrol:latest
+    - name: Upload to DockerHub
+      run: |
+        docker login -u ${{ secrets.DOCKERHUB_LOGIN }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+        VERSION=$(cat ./kodi_remotecontrol/__init__.py | tr '"' $'\n' | sed -n 2p)
+        docker push dmachard/kodi-remotecontrol:latest
+        docker push dmachard/kodi-remotecontrol:${VERSION}
