@@ -1,8 +1,7 @@
-FROM node:12
+# STEP 1 - nodejs build stage
 
-LABEL name="Kodi remotecontrol client" \
-      maintainer="d.machard@gmail.com"
-      
+FROM node:12 as builder
+    
 WORKDIR /home/kodi_rc_client
 
 COPY ./vuejs-client/ /home/kodi_rc_client/
@@ -13,9 +12,18 @@ ENV VUE_APP_KODI $VUE_APP_KODI
 RUN true \
     && npm install \
     && npm run build \
-    && npm install -g serve \
     && true
 
-EXPOSE 8080/tcp
+# STEP 2 - nginx stage
 
-ENTRYPOINT ["serve", "-s", "dist", "-l", "8080"]
+FROM nginx:alpine
+
+LABEL name="KodiRC client" \
+      maintainer="d.machard@gmail.com"
+
+RUN rm -rf /usr/share/nginx/html/*
+
+COPY --from=builder /home/kodi_rc_client/dist /usr/share/nginx/html
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
